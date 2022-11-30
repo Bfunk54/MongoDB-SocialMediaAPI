@@ -1,24 +1,33 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
-// Schema to create Student model
+// Schema to create User model
 const userSchema = new Schema(
   {
-    first: {
+    username: {
       type: String,
+      unique: true,
       required: true,
       max_length: 50,
     },
-    last: {
+    email: {
       type: String,
+      unique: true,
       required: true,
+      validate: [validateEmail, "Please fill a valid email address"],
       max_length: 50,
     },
-    github: {
-      type: String,
-      required: true,
-      max_length: 50,
-    },
-    
+    thoughts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Thought",
+      },
+    ],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   {
     toJSON: {
@@ -27,6 +36,12 @@ const userSchema = new Schema(
   }
 );
 
-const User = model('user', userSchema);
+// Email validation function
+let validateEmail = function (email) {
+  let valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return valid.test(email);
+};
+
+const User = model("user", userSchema);
 
 module.exports = User;
