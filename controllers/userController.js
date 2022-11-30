@@ -16,3 +16,21 @@ module.exports = {
             return res.status(500).json(err);
           });
       },
+      
+        // Route to get a single user by id
+  getSingleUser(req, res) {
+    User.findOne({ _id: req.params.userId, include: Thought })
+      .select('-__v')
+      .then(async (user) =>
+        !user
+          ? res.status(404).json({ message: 'No user with that ID' })
+          : res.json({
+              user,
+              friends: await friend(req.params.userId),
+            })
+      )
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json(err);
+      });
+  },
