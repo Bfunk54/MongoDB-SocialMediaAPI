@@ -3,35 +3,28 @@ const { Schema, Types } = require('mongoose');
 // Schema to create a course model
 const reactionSchema = new Schema(
   {
-    thoughtId: {
+    reactionId: {
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectId(),
     },
-    inPerson: {
-      type: Boolean,
-      default: true,
+    reactionBody: {
+      type: String,
+      required: true,
+      maxlength: 280,
+      minlength: 1,
+      default: 'Unnamed Reaction',
     },
-    startDate: {
-      type: Date,
-      default: Date.now(),
+    username: {
+      type: String,
+      required: true,
     },
-    endDate: {
-      type: Date,
-      // Sets a default value of 12 weeks from now
-      default: () => new Date(+new Date() + 84 * 24 * 60 * 60 * 1000),
-    },
-    User: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-      },
-    ],
+    timestamps: true,
   },
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
-    id: false,
   }
 );
 
