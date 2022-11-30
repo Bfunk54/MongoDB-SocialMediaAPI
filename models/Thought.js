@@ -3,17 +3,16 @@ const reactionSchema = require('./Reaction');
 
 const thoughtSchema = new Schema(
   {
-    thoughtName: {
+    thoughtText: {
       type: String,
       required: true,
-      maxlength: 50,
-      minlength: 4,
-      default: 'Unnamed assignment',
+      maxlength: 280,
+      minlength: 1,
+      default: 'Unnamed Thought',
     },
-    score: {
-      type: Number,
+    username: {
+      type: String,
       required: true,
-      default: () => Math.floor(Math.random() * (100 - 70 + 1) + 70),
     },
     createdAt: {
       type: Date,
@@ -25,7 +24,6 @@ const thoughtSchema = new Schema(
     toJSON: {
       getters: true,
     },
-    id: false,
   }
 );
 
