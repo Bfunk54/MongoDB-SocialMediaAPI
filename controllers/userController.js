@@ -34,3 +34,10 @@ module.exports = {
         return res.status(500).json(err);
       });
   },
+
+   // route to create a new user
+   createUser(req, res) {
+    User.create(req.body)
+      .then((user) => res.json(user))
+      .catch((err) => res.status(500).json(err));
+  },
