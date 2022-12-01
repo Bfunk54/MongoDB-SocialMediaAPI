@@ -1,7 +1,9 @@
-const { connect, connection } = require('mongoose');
+// Require mongoose
+const { connect, connection } = require("mongoose");
 
+// Connect to MongoDB
 const connectionString =
-  process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/studentsDB';
+  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/studentsDB";
 
 connect(connectionString, {
   useNewUrlParser: true,

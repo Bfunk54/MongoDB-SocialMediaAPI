@@ -1,4 +1,3 @@
-const { ObjectId } = require("mongoose").Types;
 const { User, Thought } = require("../models");
 
 module.exports = {
@@ -46,7 +45,9 @@ module.exports = {
       .then((thought) =>
         res.json(
           User.findOneAndUpdate(
+            // find the user by id
             { _id: req.params.userId },
+            // add the thought id to the user's `thoughts` array field
             { $push: { thoughts: thought._id } },
             { new: true }
           )
@@ -85,9 +86,13 @@ module.exports = {
 
   // Update a thought
   updateThought(req, res) {
-    Thought.findOneAndUpdate({ _id: req.params.userId }, req.body, {
-      new: true,
-    })
+    Thought.findOneAndUpdate(
+        // find the thought by its id
+        { _id: req.params.thoughtId },
+        // update the thought by its `thoughtText` value
+        req.body, 
+        { new: true }
+        )
       .then((thought) =>
         !thought
           ? res
@@ -104,7 +109,9 @@ module.exports = {
     // Add a reaction to a thought
     addReaction(req, res) {
         Thought.findOneAndUpdate(
+            // find the thought by id
             { _id: req.params.thoughtId },
+            // add the reaction to the thought's reactions array
             { $push: { reactions: req.body } },
             { new: true }
         )
@@ -122,7 +129,9 @@ module.exports = {
     // Remove a reaction from a thought
     removeReaction(req, res) {
         Thought.findOneAndUpdate(
+            // find the thought by id
             { _id: req.params.thoughtId },
+            // remove the reaction from the thought's reactions array
             { $pull: { reactions: { reactionId: req.params.reactionId } } },
             { new: true }
         )
