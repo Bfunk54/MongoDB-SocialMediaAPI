@@ -17,16 +17,15 @@ module.exports = {
       });
   },
 
-  // Get a single user by id
-  getSingleUser(req, res) {
-    User.findOne({ _id: req.params.userId, include: Thought })
+  // Get a single thought by id
+  getSingleThought(req, res) {
+    Thought.findOne({ _id: req.params.thoughtId})
       .select("-__v")
-      .then(async (user) =>
-        !user
-          ? res.status(404).json({ message: "No user with that ID" })
+      .then(async (thought) =>
+        !thought
+          ? res.status(404).json({ message: "No thought with that ID" })
           : res.json({
-              user,
-              friends: await friend(req.params.userId),
+              thought
             })
       )
       .catch((err) => {
