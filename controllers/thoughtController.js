@@ -43,7 +43,11 @@ module.exports = {
   "userId": "5edff358a0fcb779aa7b118b"
 } */
     Thought.create(req.body)
-      .then((thought) => res.json(thought))
+      .then((thought) => res.json(thought, User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $push: { thoughts: thought._id } },
+        { new: true }
+      ))
       .catch((err) => res.status(500).json(err));
   },
 
