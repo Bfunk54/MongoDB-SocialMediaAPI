@@ -3,6 +3,7 @@ const {
   getUsers,
   getSingleUser,
   createUser,
+  updateUser,
   deleteUser,
   removeFriend,
   addFriend,
@@ -12,7 +13,7 @@ const {
 router.route("/").get(getUsers).post(createUser);
 
 // route to get a single user and delete a user
-router.route("/:userId").get(getSingleUser).delete(deleteUser);
+router.route("/:userId").get(getSingleUser).delete(deleteUser).put(updateUser);
 
 // route to add and delete a friend
 router.route("/:userId/friends/:friendId").post(addFriend).delete(removeFriend);
