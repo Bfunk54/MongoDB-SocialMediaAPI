@@ -47,9 +47,9 @@ module.exports = {
         { _id: req.params.userId },
         { $push: { thoughts: thought._id } },
         { new: true }
-      ))
-      .then((thought) =>
-        !thought
+      )))
+      .then((user) =>
+        !user
           ? res.status(404).json({
               message: "Thought created, but no user found at that id",
             })
@@ -60,25 +60,16 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-  // Delete a user and remove them from the course
-  deleteUser(req, res) {
-    User.findOneAndRemove({ _id: req.params.userId })
-      .then((user) =>
-        !user
-          ? res.status(404).json({ message: "This user does not exist" })
-          : Thought.findAllAndDelete(
-              { user: req.params.userId },
-              { $pull: { user: req.params.userId } },
-              { new: true }
-            )
-      )
+  // Delete a thought
+  deleteThought(req, res) {
+    Thought.findOneAndRemove({ _id: req.params.userId })
       .then((thought) =>
         !thought
           ? res.status(404).json({
-              message: "User deleted, but no thoughts found",
+              message: "No thought found with that ID",
             })
           : res.json({
-              message: "User and all thoughts have been successfully deleted",
+              message: "The thought has been successfully deleted",
             })
       )
       .catch((err) => {
