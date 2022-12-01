@@ -34,15 +34,16 @@ module.exports = {
       });
   },
 
-  // Create a new user
-  createUser(req, res) {
+  // Create a new thought
+  createThought(req, res) {
     /* example data
-  {
-   "username": "lernantino",
-   "email": "lernantino@gmail.com"
-  } */
-    User.create(req.body)
-      .then((user) => res.json(user))
+{
+  "thoughtText": "Here's a cool thought...",
+  "username": "lernantino",
+  "userId": "5edff358a0fcb779aa7b118b"
+} */
+    Thought.create(req.body)
+      .then((thought) => res.json(thought))
       .catch((err) => res.status(500).json(err));
   },
 
