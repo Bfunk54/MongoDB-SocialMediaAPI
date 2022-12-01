@@ -19,13 +19,13 @@ module.exports = {
 
   // Get a single thought by id
   getSingleThought(req, res) {
-    Thought.findOne({ _id: req.params.thoughtId})
+    Thought.findOne({ _id: req.params.thoughtId })
       .select("-__v")
       .then(async (thought) =>
         !thought
           ? res.status(404).json({ message: "No thought with that ID" })
           : res.json({
-              thought
+              thought,
             })
       )
       .catch((err) => {
@@ -43,18 +43,23 @@ module.exports = {
   "userId": "5edff358a0fcb779aa7b118b"
 } */
     Thought.create(req.body)
-      .then((thought) => res.json(User.findOneAndUpdate(
-        { _id: req.params.userId },
-        { $push: { thoughts: thought._id } },
-        { new: true }
-      )))
+      .then((thought) =>
+        res.json(
+          User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $push: { thoughts: thought._id } },
+            { new: true }
+          )
+        )
+      )
       .then((user) =>
         !user
           ? res.status(404).json({
               message: "Thought created, but no user found at that id",
             })
           : res.json({
-              message: "Thought has been created and assigned to the user have been successfully deleted",
+              message:
+                "Thought has been created and assigned to the user have been successfully deleted",
             })
       )
       .catch((err) => res.status(500).json(err));
@@ -78,13 +83,17 @@ module.exports = {
       });
   },
 
-  // Update a user
-  updateUser(req, res) {
-    User.findOneAndUpdate({ _id: req.params.userId }, req.body, { new: true })
-      .then((user) =>
-        !user
-          ? res.status(404).json({ message: "This user does not exist" })
-          : res.json({ message: "User successfully updated" })
+  // Update a thought
+  updateThought(req, res) {
+    Thought.findOneAndUpdate({ _id: req.params.userId }, req.body, {
+      new: true,
+    })
+      .then((thought) =>
+        !thought
+          ? res
+              .status(404)
+              .json({ message: "This is not the thought you are looking for" })
+          : res.json({ message: "Thought successfully updated" })
       )
       .catch((err) => {
         console.log(err);
