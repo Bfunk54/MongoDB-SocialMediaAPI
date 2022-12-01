@@ -132,7 +132,7 @@ module.exports = {
             // find the thought by id
             { _id: req.params.thoughtId },
             // remove the reaction from the thought's reactions array
-            { $pull: { reactions: { reactionId: req.params.reactionId } } },
+            { $pull: { reactions: { reactionId: req.body.reactionId } } },
             { new: true }
         )
             .then((thought) =>
