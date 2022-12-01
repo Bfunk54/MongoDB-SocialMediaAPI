@@ -1,4 +1,3 @@
-const { ObjectId } = require("mongoose").Types;
 const { User, Thought } = require("../models");
 
 module.exports = {
@@ -53,10 +52,10 @@ module.exports = {
       .then((user) =>
         !user
           ? res.status(404).json({ message: "This user does not exist" })
-          : Thought.findAllAndDelete(
-              { user: req.params.userId },
-              { $pull: { user: req.params.userId } },
-              { new: true }
+          // If the user exists find all thoughts and remove all associated thoughts
+          : Thought.deleteMany(
+            // Find all thoughts where the username is the same one that matches the user id
+              { username: user.username }
             )
       )
       .then((thought) =>
@@ -76,7 +75,13 @@ module.exports = {
 
   // Update a user
   updateUser(req, res) {
-    User.findOneAndUpdate({ _id: req.params.userId }, req.body, { new: true })
+    User.findOneAndUpdate(
+      // find the user by id
+      { _id: req.params.userId }, 
+      // update the user
+      req.body, 
+      { new: true }
+      )
       .then((user) =>
         !user
           ? res.status(404).json({ message: "This user does not exist" })
@@ -91,7 +96,9 @@ module.exports = {
   // Add a friend
   addFriend(req, res) {
     User.findOneAndUpdate(
+      // find the user by id
       { _id: req.params.userId },
+      // add the friend's id to the `friends` array
       { $addToSet: { friends: req.params.friendId } },
       { new: true }
     )
@@ -109,7 +116,9 @@ module.exports = {
   // Remove a friend
   removeFriend(req, res) {
     User.findOneAndUpdate(
+      // find the user by id
       { _id: req.params.userId },
+      // remove the friend from the user's friend list
       { $pull: { friends: req.params.friendId } },
       { new: true }
     )
