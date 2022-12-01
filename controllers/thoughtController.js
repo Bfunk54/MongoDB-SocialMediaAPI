@@ -5,10 +5,15 @@ module.exports = {
   getThoughts(req, res) {
     Thought.find()
       .then(async (thoughts) => {
-        const thoughtsObj = {
-          thoughts,
-        };
-        return res.json(thoughtsObj);
+        // thoughts.map(thoughtJSON => thoughtJSON.toJSON());
+        // // thoughts.createdAt = thoughts.createdAt.toLocaleDateString();
+        // for (let i = 0; i < thoughts.length; i++) {
+        //   const thought = thoughts[i];
+        //   const date = new Date(thought.createdAt);
+        //   thought.createdAt = date.toLocaleDateString();
+        //   console.log(thought.createdAt);
+        // }
+        return res.json(thoughts);
       })
       .catch((err) => {
         console.log(err);
@@ -87,12 +92,12 @@ module.exports = {
   // Update a thought
   updateThought(req, res) {
     Thought.findOneAndUpdate(
-        // find the thought by its id
-        { _id: req.params.thoughtId },
-        // update the thought by its `thoughtText` value
-        req.body, 
-        { new: true }
-        )
+      // find the thought by its id
+      { _id: req.params.thoughtId },
+      // update the thought by its `thoughtText` value
+      req.body,
+      { new: true }
+    )
       .then((thought) =>
         !thought
           ? res
@@ -106,43 +111,43 @@ module.exports = {
       });
   },
 
-    // Add a reaction to a thought
-    addReaction(req, res) {
-        Thought.findOneAndUpdate(
-            // find the thought by id
-            { _id: req.params.thoughtId },
-            // add the reaction to the thought's reactions array
-            { $push: { reactions: req.body } },
-            { new: true }
-        )
-            .then((thought) =>
-            !thought
-                ? res.status(404).json({ message: "No thought with that ID" })
-                : res.json({ message: "Reaction successfully added" })
-            )
-            .catch((err) => {
-            console.log(err);
-            res.status(500).json(err);
-            });
-        },
+  // Add a reaction to a thought
+  addReaction(req, res) {
+    Thought.findOneAndUpdate(
+      // find the thought by id
+      { _id: req.params.thoughtId },
+      // add the reaction to the thought's reactions array
+      { $push: { reactions: req.body } },
+      { new: true }
+    )
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: "No thought with that ID" })
+          : res.json({ message: "Reaction successfully added" })
+      )
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
 
-    // Remove a reaction from a thought
-    removeReaction(req, res) {
-        Thought.findOneAndUpdate(
-            // find the thought by id
-            { _id: req.params.thoughtId },
-            // remove the reaction from the thought's reactions array
-            { $pull: { reactions: { reactionId: req.body.reactionId } } },
-            { new: true }
-        )
-            .then((thought) =>
-            !thought
-                ? res.status(404).json({ message: "No thought with that ID" })
-                : res.json({ message: "Reaction successfully removed" })
-            )
-            .catch((err) => {
-            console.log(err);
-            res.status(500).json(err);
-            });
-        }
+  // Remove a reaction from a thought
+  removeReaction(req, res) {
+    Thought.findOneAndUpdate(
+      // find the thought by id
+      { _id: req.params.thoughtId },
+      // remove the reaction from the thought's reactions array
+      { $pull: { reactions: { reactionId: req.body.reactionId } } },
+      { new: true }
+    )
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: "No thought with that ID" })
+          : res.json({ message: "Reaction successfully removed" })
+      )
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
 };
