@@ -1,6 +1,7 @@
-const { Schema, model } = require('mongoose');
-const reactionSchema = require('./Reaction');
+const { Schema, model } = require("mongoose");
+const reactionSchema = require("./Reaction");
 
+// Function to format date
 function format_date(date) {
   // Format date as MM/DD/YYYY
   return date.toLocaleDateString();
@@ -13,16 +14,16 @@ const thoughtSchema = new Schema(
       required: true,
       maxlength: 280,
       minlength: 1,
-      default: 'Unnamed Thought',
+      default: "Unnamed Thought",
     },
     username: {
       type: String,
       required: true,
     },
-    createdAt: { 
-      type: Date, 
-      default: Date.now, 
-      get: format_date 
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: format_date,
     },
     reactions: [reactionSchema],
   },
@@ -34,11 +35,10 @@ const thoughtSchema = new Schema(
   }
 );
 
-
-thoughtSchema.virtual('reactionCount').get(function() {
+thoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
 
-const Thought = model('Thought', thoughtSchema);
+const Thought = model("Thought", thoughtSchema);
 
 module.exports = Thought;
