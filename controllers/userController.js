@@ -87,4 +87,22 @@ module.exports = {
         res.status(500).json(err);
       });
   },
+
+  // Add a friend
+  addFriend(req, res) {
+    User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $addToSet: { friends: req.params.friendId } },
+      { new: true }
+    )
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "This user does not exist" })
+          : res.json({ message: "This user has been added as a friend" })
+      )
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
 };
