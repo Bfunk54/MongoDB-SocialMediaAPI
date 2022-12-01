@@ -14,8 +14,10 @@ const thoughtSchema = new Schema(
       type: String,
       required: true,
     },
-    timestamps: true,
     reactions: [reactionSchema],
+  },
+  {
+    timestamps: true,
   },
   {
     toJSON: {

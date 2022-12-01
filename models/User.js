@@ -1,5 +1,10 @@
 const { Schema, model } = require("mongoose");
 
+// Email validation function
+let validateEmail = function (email) {
+  let valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return valid.test(email);
+};
 // Schema to create User model
 const userSchema = new Schema(
   {
@@ -35,12 +40,6 @@ const userSchema = new Schema(
     },
   }
 );
-
-// Email validation function
-let validateEmail = function (email) {
-  let valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  return valid.test(email);
-};
 
 const User = model("user", userSchema);
 
