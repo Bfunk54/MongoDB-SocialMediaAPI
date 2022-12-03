@@ -35,6 +35,7 @@ const reactionSchema = new Schema(
       virtuals: true,
       getters: true,
     },
+    id: false,
   }
 );
 
