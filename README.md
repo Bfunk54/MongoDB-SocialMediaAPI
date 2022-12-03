@@ -49,7 +49,8 @@ To test, install it, then use it and test all routes available. All functionalit
 
 ## Screenshots
 #
-![]()
+![](./images/mongodb-socialmediaapi1.png)
+![](./images/mongodb-socialmediaapi2.png)
 <p align="right">(<a href="mit-license">back to top</a>)</p>
 
 ## Questions
@@ -61,7 +62,7 @@ Email me with any questions: ben_fein@icloud.com
 
 ## Links
 #
-[MongoDB-SocialMediaAPI]()
+[Video Walkthrough]()
 #
-[Github Repo]()
+[Github Repo](https://github.com/Bfunk54/MongoDB-SocialMediaAPI)
 <p align="right">(<a href="#mit-license">back to top</a>)</p>
