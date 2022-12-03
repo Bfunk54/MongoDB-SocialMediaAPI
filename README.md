@@ -62,7 +62,7 @@ Email me with any questions: ben_fein@icloud.com
 
 ## Links
 #
-[Video Walkthrough]()
+[Video Walkthrough](https://drive.google.com/file/d/1FeGWUr6l1RB_odp0YS_6imJcJ2XazzBF/view?usp=sharing)
 #
 [Github Repo](https://github.com/Bfunk54/MongoDB-SocialMediaAPI)
 <p align="right">(<a href="#mit-license">back to top</a>)</p>
