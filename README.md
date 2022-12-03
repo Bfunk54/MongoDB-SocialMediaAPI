@@ -23,36 +23,45 @@ This is an api utilizing technologies from Mongoose and MongoDB to create a data
 <p align="right">(<a href="#mit-license">back to top</a>)</p>
 
 ## Installation
+#
 To install, clone the repo into your favorite code editor. Run the command 'npm i' to install the needed dependencies to run this server. Now you should be able to run the command 'npm run dev' and this should start the server up.
 <p align="right">(<a href="#mit-license">back to top</a>)</p>
 
 ## Usage
+#
 To use it, run that 'npm run dev' command and then you can use your favorite API Editor such as Postman or Insomnia to access it at 'localhost:3001'. Now go to the routes folder to see what routes to run. All routes will have /api first and everything should work well. You can use the seeds in the seed folder to get you started.
 <p align="right">(<a href="#mit-license">back to top</a>)</p>
 
 ## License
+#
 [MIT License](https://opensource.org/licenses/MIT)
 <p align="right">(<a href="#mit-license">back to top</a>)</p>
 
 ## Contributing
+#
 Bfunk54/MongoDB-SocialMediaAPI
 <p align="right">(<a href="#mit-license">back to top</a>)</p>
 
 ## Tests
+#
 To test, install it, then use it and test all routes available. All functionality should be self-explanitory with the variable names and commenting.
 <p align="right">(<a href="#mit-license">back to top</a>)</p>
 
 ## Screenshots
+#
 ![]()
 <p align="right">(<a href="mit-license">back to top</a>)</p>
 
 ## Questions
+#
 Github: https://github.com/Bfunk54
 
 Email me with any questions: ben_fein@icloud.com
 <p align="right">(<a href="#mit-license">back to top</a>)</p>
 
-## Link to the site:
+## Links
+#
 [MongoDB-SocialMediaAPI]()
+#
 [Github Repo]()
 <p align="right">(<a href="#mit-license">back to top</a>)</p>
